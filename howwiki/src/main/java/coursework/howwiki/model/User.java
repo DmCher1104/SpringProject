@@ -31,28 +31,28 @@ public class User implements UserDetails {
     @Column(name="number_of_post")
     private int numberOfPost;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_x_privelege",
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_x_privilege",
             joinColumns = {
                     @JoinColumn(name = "id_user")
-            }, inverseJoinColumns = {@JoinColumn(name = "id_privelege")})
-    private Set<Privelege> priveleges;
+            }, inverseJoinColumns = {@JoinColumn(name = "id_privilege")})
+    private Set<Privilege> privileges;
 
-    public User(Long id, String login, String password, String email, int numberOfPost, Set<Privelege> priveleges) {
+    public User(Long id, String login, String password, String email, int numberOfPost, Set<Privilege> privileges) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.email = email;
         this.numberOfPost = numberOfPost;
-        this.priveleges = priveleges;
+        this.privileges = privileges;
     }
 
-    public Set<Privelege> getPriveleges() {
-        return priveleges;
+    public Set<Privilege> getPrivileges() {
+        return privileges;
     }
 
-    public void setPriveleges(Set<Privelege> priveleges) {
-        this.priveleges = priveleges;
+    public void setPrivileges(Set<Privilege> privileges) {
+        this.privileges = this.privileges;
     }
 
     public User() {
@@ -76,7 +76,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return priveleges;
+        return privileges;
     }
 
     public String getPassword() {

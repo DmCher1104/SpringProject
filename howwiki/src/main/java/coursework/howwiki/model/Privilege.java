@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table
-public class Privelege implements GrantedAuthority {
+public class Privilege implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,25 +18,25 @@ public class Privelege implements GrantedAuthority {
     @Column
     private String name;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_x_privelege",
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_x_privilege",
             joinColumns = {
-                    @JoinColumn(name = "id_privelege")
+                    @JoinColumn(name = "id_privilege")
             }, inverseJoinColumns = {@JoinColumn(name = "id_user")})
     private List<User> users;
 
-    public Privelege(Long id, String name, List<User> users) {
+    public Privilege(Long id, String name, List<User> users) {
         this.id = id;
         this.name = name;
         this.users = users;
     }
 
-    public Privelege(Long id, String name) {
+    public Privilege(Long id, String name) {
         this.id=id;
         this.name=name;
     }
 
-    public Privelege() {
+    public Privilege() {
     }
 
     public Long getId() {
@@ -59,11 +59,11 @@ public class Privelege implements GrantedAuthority {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUser(List<User> users) {
         this.users = users;
     }
 
-    @Override
+   @Override
     public String getAuthority() {
         return name;
     }

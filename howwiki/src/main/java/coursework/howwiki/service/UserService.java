@@ -1,10 +1,9 @@
 package coursework.howwiki.service;
 
-import coursework.howwiki.model.Privelege;
+import coursework.howwiki.model.Privilege;
 import coursework.howwiki.model.User;
 import coursework.howwiki.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -34,7 +33,7 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
-        user.setPriveleges(Collections.singleton(new Privelege(10L, "ROLE_USER")));
+        user.setPrivileges(Collections.singleton(new Privilege(10L, "ROLE_USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
